@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -24,17 +25,22 @@ public class Person implements Serializable {
     @Column(name="id")
     private Long id;
 
-    @Column(name="name",length=50)
+    @Column(name="name",length=50,nullable = false)
     private String name;
 
-    @Column(name="surname",length=150)
+    @Column(name="surname",length=150,nullable = false)
     private String surname;
 
-    @Column(name="cpf",length = 13)
+    @Column(name="cpf",length = 13, unique = true, nullable = false)
     private String cpf;
 
     @Temporal(TemporalType.DATE)
     @Column(name="birthdate")
     private LocalDate birthdate;
 
+    @OneToMany(
+            fetch = FetchType.LAZY ,
+            cascade = CascadeType.ALL ,
+            orphanRemoval = true)
+    private List<Phone> phones;
 }
