@@ -24,10 +24,10 @@ public class Phone implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="type")
+    @Column(name="type",nullable = false)
     private PhoneType type;
 
-    @Column(name="number",length=20)
+    @Column(name="number",length=20,nullable = false)
     private String number;
 
 }
