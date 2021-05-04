@@ -1,0 +1,5 @@
+
+CREATE TABLE IF NOT EXISTS phone (
+    id SERIAL PRIMARY KEY ,
+    number VARCHAR(20) NOT NULL
+);
