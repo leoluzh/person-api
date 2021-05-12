@@ -1,0 +1,22 @@
+# an example of create of a person
+POST http://{{host}}:{{port}}/api/v1/persons
+Content-Type: application/json
+Content-Encoding: UTF-8
+
+{
+  "name" :  "John",
+  "surname": "Doe",
+  "cpf": "999.999.999-99",
+  "birthdate": "01/01/2000",
+  "phones": [
+    { "type": "MOBILE",
+      "number": "99 9999-9999"
+    },
+    { "type": "HOME",
+      "number": "88 8888-8888"
+    },
+    { "type": "COMMERCIAL",
+      "number": "77 7777-7777"
+    }
+  ]
+}
