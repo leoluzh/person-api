@@ -1,15 +1,11 @@
 package com.lambdasys.person.api.controller;
 
 import com.lambdasys.person.api.dto.PersonDto;
-import com.lambdasys.person.api.entity.Person;
-import com.lambdasys.person.api.mapper.PersonMapper;
-import com.lambdasys.person.api.repository.PersonRepository;
+import com.lambdasys.person.api.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -17,19 +13,19 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/persons")
 public class PersonController {
 
-    private final PersonRepository repository;
-    private final PersonMapper personMapper = PersonMapper.INSTANCE;
+    private final PersonService personService;
 
     @Autowired
-    public PersonController(PersonRepository repository){
-        this.repository = repository;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     @PostMapping()
-    public ResponseEntity<PersonDto> create(@RequestBody @Valid PersonDto personDto){
-        Person person = personMapper.toEntity(personDto);
-        person = repository.save(person);
-        return ResponseEntity.ok(personMapper.toDto(person));
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<PersonDto> create(@RequestBody @Valid PersonDto personDto) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(personService.create(personDto));
     }
 
 }
