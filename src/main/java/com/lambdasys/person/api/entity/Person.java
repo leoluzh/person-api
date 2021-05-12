@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -36,7 +36,7 @@ public class Person implements Serializable {
 
     @Temporal(TemporalType.DATE)
     @Column(name="birthdate")
-    private LocalDate birthdate;
+    private Date birthdate;
 
     @OneToMany(
             fetch = FetchType.LAZY ,
