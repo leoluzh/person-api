@@ -1,6 +1,7 @@
 package com.lambdasys.person.api.controller;
 
 import com.lambdasys.person.api.dto.PersonDto;
+import com.lambdasys.person.api.exception.PersonNotFoundException;
 import com.lambdasys.person.api.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,4 +35,11 @@ public class PersonController {
     public ResponseEntity<List<PersonDto>> listAll() {
         return ResponseEntity.ok(personService.findAll());
     }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<PersonDto> findById(@PathVariable("id") Long id) throws PersonNotFoundException {
+        return ResponseEntity.ok(personService.findById(id));
+    }
+
 }
