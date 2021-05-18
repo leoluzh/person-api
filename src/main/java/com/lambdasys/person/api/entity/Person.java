@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -34,13 +35,13 @@ public class Person implements Serializable {
     @Column(name="cpf",length = 13, unique = true, nullable = false)
     private String cpf;
 
-    @Temporal(TemporalType.DATE)
     @Column(name="birthdate")
-    private Date birthdate;
+    private LocalDate birthdate;
 
     @OneToMany(
             fetch = FetchType.LAZY ,
             cascade = CascadeType.ALL ,
             orphanRemoval = true)
     private List<Phone> phones;
+
 }
