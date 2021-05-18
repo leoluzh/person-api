@@ -23,9 +23,7 @@ public class PersonService {
     }
 
     public PersonDto create(PersonDto personDto){
-        Person person = personMapper.toModel(personDto);
-        person = personRepository.save(person);
-        return personMapper.toDto(person);
+        return save(personDto);
     }
 
     public List<PersonDto> findAll(){
@@ -37,7 +35,7 @@ public class PersonService {
     }
 
     public PersonDto findById(Long id) throws PersonNotFoundException{
-        Person person = verifyIfExists(id);
+        var person = verifyIfExists(id);
         return personMapper.toDto(person);
     }
 
@@ -51,4 +49,15 @@ public class PersonService {
                 .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
+    public PersonDto updateById(Long id, final PersonDto personDto) throws PersonNotFoundException {
+        verifyIfExists(id);
+        return save(personDto);
+    }
+
+    private PersonDto save(PersonDto personDto){
+        var person = personMapper.toModel(personDto);
+        person = personRepository.save(person);
+        return personMapper.toDto(person);
+    }
+    
 }
