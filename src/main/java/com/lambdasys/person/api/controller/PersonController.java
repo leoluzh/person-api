@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/persons")
@@ -28,4 +29,9 @@ public class PersonController {
                 .body(personService.create(personDto));
     }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<PersonDto>> listAll() {
+        return ResponseEntity.ok(personService.findAll());
+    }
 }
