@@ -37,9 +37,14 @@ public class PersonService {
     }
 
     public PersonDto findById(Long id) throws PersonNotFoundException{
-        return personRepository.findById(id)
-                .map(personMapper::toDto)
+        Person person = personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
+        return personMapper.toDto(person);
+    }
+
+    public void deleteById(Long id) throws PersonNotFoundException {
+        PersonDto personDto = findById(id);
+        personRepository.deleteById(id);
     }
 
 }
