@@ -48,4 +48,10 @@ public class PersonController {
         personService.deleteById(id);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<PersonDto> update(@PathVariable("id") Long id, @RequestBody @Valid PersonDto personDto) throws PersonNotFoundException {
+        return ResponseEntity.ok(personService.updateById(id,personDto));
+    }
+
 }
