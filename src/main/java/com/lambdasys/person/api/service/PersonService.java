@@ -2,6 +2,7 @@ package com.lambdasys.person.api.service;
 
 import com.lambdasys.person.api.dto.PersonDto;
 import com.lambdasys.person.api.entity.Person;
+import com.lambdasys.person.api.exception.PersonNotFoundException;
 import com.lambdasys.person.api.mapper.PersonMapper;
 import com.lambdasys.person.api.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,13 @@ public class PersonService {
                 .findAll()
                 .stream()
                 .map(personMapper::toDto)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    public PersonDto findById(Long id) throws PersonNotFoundException{
+        return personRepository.findById(id)
+                .map(personMapper::toDto)
+                .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
 }
