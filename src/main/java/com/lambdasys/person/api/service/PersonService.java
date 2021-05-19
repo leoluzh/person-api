@@ -5,21 +5,18 @@ import com.lambdasys.person.api.entity.Person;
 import com.lambdasys.person.api.exception.PersonNotFoundException;
 import com.lambdasys.person.api.mapper.PersonMapper;
 import com.lambdasys.person.api.repository.PersonRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
 
     private final PersonRepository personRepository;
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
-
-    @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
 
     public PersonDto create(PersonDto personDto) {
         return save(personDto);
