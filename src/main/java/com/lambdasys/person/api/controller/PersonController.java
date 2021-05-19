@@ -3,6 +3,7 @@ package com.lambdasys.person.api.controller;
 import com.lambdasys.person.api.dto.PersonDto;
 import com.lambdasys.person.api.exception.PersonNotFoundException;
 import com.lambdasys.person.api.service.PersonService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/persons")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController implements PersonControllerDocs {
 
     private final PersonService personService;
-
-    @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
