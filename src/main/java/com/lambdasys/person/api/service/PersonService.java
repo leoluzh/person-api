@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -18,15 +17,15 @@ public class PersonService {
     private final PersonMapper personMapper = PersonMapper.INSTANCE;
 
     @Autowired
-    public PersonService(PersonRepository personRepository){
+    public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
-    public PersonDto create(PersonDto personDto){
+    public PersonDto create(PersonDto personDto) {
         return save(personDto);
     }
 
-    public List<PersonDto> findAll(){
+    public List<PersonDto> findAll() {
         return personRepository
                 .findAll()
                 .stream()
@@ -34,7 +33,7 @@ public class PersonService {
                 .toList();
     }
 
-    public PersonDto findById(Long id) throws PersonNotFoundException{
+    public PersonDto findById(Long id) throws PersonNotFoundException {
         var person = verifyIfExists(id);
         return personMapper.toDto(person);
     }
@@ -54,10 +53,10 @@ public class PersonService {
         return save(personDto);
     }
 
-    private PersonDto save(PersonDto personDto){
+    private PersonDto save(PersonDto personDto) {
         var person = personMapper.toModel(personDto);
         person = personRepository.save(person);
         return personMapper.toDto(person);
     }
-    
+
 }
