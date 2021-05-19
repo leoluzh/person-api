@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/persons")
-public class PersonController {
+public class PersonController implements PersonControllerDocs {
 
     private final PersonService personService;
 
