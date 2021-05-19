@@ -9,9 +9,10 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface PersonMapper {
 
+    String DATE_FORMAT = "dd-MM-yyyy";
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
-    @Mapping(target = "birthdate",source = "birthdate",dateFormat = "dd-MM-yyyy")
+    @Mapping(target = "birthdate",source = "birthdate",dateFormat = DATE_FORMAT)
     Person toModel(PersonDto personDto);
 
     PersonDto toDto(Person person);
